@@ -1,9 +1,9 @@
-package com.quietcolossus.jukeboxd;
+package com.quietcolossus.jukeboxd.controller;
 
+import com.quietcolossus.jukeboxd.model.JukeboxdAlbum;
 import com.quietcolossus.jukeboxd.model.JukeboxdArtist;
 import com.quietcolossus.jukeboxd.service.JukeboxdArtistService;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,10 +11,10 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/artist")
-public class JukeboxdArtistResource {
+public class JukeboxdArtistController {
     private final JukeboxdArtistService jukeboxdArtistService;
 
-    public JukeboxdArtistResource(JukeboxdArtistService jukeboxdArtistService) {
+    public JukeboxdArtistController(JukeboxdArtistService jukeboxdArtistService) {
         this.jukeboxdArtistService = jukeboxdArtistService;
     }
 
@@ -22,6 +22,12 @@ public class JukeboxdArtistResource {
     public ResponseEntity<List<JukeboxdArtist>> getAllArtists () {
         List<JukeboxdArtist> artists = jukeboxdArtistService.findAllArtists();
         return new ResponseEntity<>(artists, HttpStatus.OK);
+    }
+
+    @PostMapping("/batchAdd")
+    public ResponseEntity<List<JukeboxdArtist>> addAlbums(@RequestBody List<JukeboxdArtist> artists) {
+        List<JukeboxdArtist> savedArtists = jukeboxdArtistService.saveAll(artists);
+        return ResponseEntity.ok(savedArtists);
     }
 
     @GetMapping("/find/{id}")

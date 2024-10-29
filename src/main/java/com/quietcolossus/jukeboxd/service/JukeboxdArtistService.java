@@ -1,6 +1,7 @@
 package com.quietcolossus.jukeboxd.service;
 
 import com.quietcolossus.jukeboxd.exception.ArtistNotFoundException;
+import com.quietcolossus.jukeboxd.model.JukeboxdAlbum;
 import com.quietcolossus.jukeboxd.model.JukeboxdArtist;
 import com.quietcolossus.jukeboxd.model.JukeboxdArtist;
 import com.quietcolossus.jukeboxd.repository.JukeboxdArtistRepository;
@@ -35,6 +36,9 @@ public class JukeboxdArtistService {
     public JukeboxdArtist findArtistById(Long id) {
         return jukeboxdArtistRepository.findById(id)
                 .orElseThrow(() -> new ArtistNotFoundException("Artist by id " + id + " was not found"));
+    }
+    public List<JukeboxdArtist> saveAll(List<JukeboxdArtist> artists) {
+        return jukeboxdArtistRepository.saveAll(artists);
     }
 
     public void deleteArtist(Long id) {

@@ -28,10 +28,8 @@ public class JukeboxdAlbumService {
     public List<JukeboxdAlbum> saveAll(List<JukeboxdAlbum> albums) {
         return jukeboxdAlbumRepository.saveAll(albums);
     }
-
-
     public List<JukeboxdAlbum> findAllAlbumsByArtist(Long artistId) {
-        return jukeboxdAlbumRepository.findById(artistId).stream().toList();
+        return jukeboxdAlbumRepository.findByArtistId(artistId);
     }
 
     public JukeboxdAlbum updateAlbum(JukeboxdAlbum album) {

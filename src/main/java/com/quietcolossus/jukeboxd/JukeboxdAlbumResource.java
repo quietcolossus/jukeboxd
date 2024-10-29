@@ -18,7 +18,7 @@ public class JukeboxdAlbumResource {
         this.jukeboxdAlbumService = jukeboxdAlbumService;
     }
 
-    @GetMapping
+    @GetMapping("/all")
     public ResponseEntity<List<JukeboxdAlbum>> getAllAlbums () {
         List<JukeboxdAlbum> albums = jukeboxdAlbumService.findAllAlbums();
         return new ResponseEntity<>(albums, HttpStatus.OK);

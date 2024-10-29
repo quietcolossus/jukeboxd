@@ -19,12 +19,16 @@ public class JukeboxdAlbumService {
     }
 
     public JukeboxdAlbum addAlbum(JukeboxdAlbum album) {
-        album.setAlbumId(Long.valueOf(UUID.randomUUID().toString()));
         return jukeboxdAlbumRepository.save(album);
     }
 
     public List<JukeboxdAlbum> findAllAlbums() {
         return jukeboxdAlbumRepository.findAll();
+    }
+
+
+    public List<JukeboxdAlbum> findAllAlbumsByArtist(Long artistId) {
+        return jukeboxdAlbumRepository.findById(artistId).stream().toList();
     }
 
     public JukeboxdAlbum updateAlbum(JukeboxdAlbum album) {

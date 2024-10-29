@@ -1,5 +1,6 @@
 package com.quietcolossus.jukeboxd.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import jakarta.persistence.*;
 import org.springframework.data.annotation.CreatedDate;
@@ -22,9 +23,9 @@ public class JukeboxdAlbum {
 
     private String title;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "artist_id", nullable = true)
-    private JukeboxdArtist artist;
+    private Long artistId;
+
+    private String artistName;
 
     private String description;
     private LocalDate releaseDate;

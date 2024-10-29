@@ -36,6 +36,12 @@ public class JukeboxdAlbumResource {
         return new ResponseEntity<>(newAlbum, HttpStatus.CREATED);
     }
 
+    @PostMapping("/batchAdd")
+    public ResponseEntity<List<JukeboxdAlbum>> addAlbums(@RequestBody List<JukeboxdAlbum> albums) {
+        List<JukeboxdAlbum> savedAlbums = jukeboxdAlbumService.saveAll(albums);
+        return ResponseEntity.ok(savedAlbums);
+    }
+
     @PutMapping("/update")
     public ResponseEntity<JukeboxdAlbum> updateAlbum(@RequestBody JukeboxdAlbum album) {
         JukeboxdAlbum updatedAlbum = jukeboxdAlbumService.updateAlbum(album);

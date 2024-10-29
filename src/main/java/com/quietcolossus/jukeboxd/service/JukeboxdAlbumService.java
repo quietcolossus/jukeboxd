@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.UUID;
 
 @Service
 public class JukeboxdAlbumService {
@@ -24,6 +23,10 @@ public class JukeboxdAlbumService {
 
     public List<JukeboxdAlbum> findAllAlbums() {
         return jukeboxdAlbumRepository.findAll();
+    }
+
+    public List<JukeboxdAlbum> saveAll(List<JukeboxdAlbum> albums) {
+        return jukeboxdAlbumRepository.saveAll(albums);
     }
 
 

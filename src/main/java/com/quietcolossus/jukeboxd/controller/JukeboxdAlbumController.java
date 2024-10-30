@@ -20,23 +20,23 @@ public class JukeboxdAlbumController {
     @GetMapping("/all")
     public ResponseEntity<List<JukeboxdAlbum>> getAllAlbums () {
         List<JukeboxdAlbum> albums = jukeboxdAlbumService.findAllAlbums();
-        return new ResponseEntity<>(albums, HttpStatus.OK);
+        return ResponseEntity.ok(albums);
     }
 
     @GetMapping("/find/{id}")
     public ResponseEntity<JukeboxdAlbum> getAlbumById (@PathVariable("id") Long id) {
         JukeboxdAlbum album = jukeboxdAlbumService.findAlbumById(id);
-        return new ResponseEntity<>(album, HttpStatus.OK);
+        return ResponseEntity.ok(album);
     }
     @GetMapping("/find/artist/{id}")
     public ResponseEntity<List<JukeboxdAlbum>> findAllAlbumsByArtist (@PathVariable("id") Long id) {
         List<JukeboxdAlbum> albumsByArtist = jukeboxdAlbumService.findAllAlbumsByArtist(id);
-        return new ResponseEntity<>(albumsByArtist, HttpStatus.OK);
+        return ResponseEntity.ok(albumsByArtist);
     }
     @PostMapping("/add")
     public ResponseEntity<JukeboxdAlbum> addAlbum(@RequestBody JukeboxdAlbum album) {
         JukeboxdAlbum newAlbum = jukeboxdAlbumService.addAlbum(album);
-        return new ResponseEntity<>(newAlbum, HttpStatus.CREATED);
+        return ResponseEntity.ok(newAlbum);
     }
 
     @PostMapping("/batchAdd")
@@ -48,12 +48,12 @@ public class JukeboxdAlbumController {
     @PutMapping("/update")
     public ResponseEntity<JukeboxdAlbum> updateAlbum(@RequestBody JukeboxdAlbum album) {
         JukeboxdAlbum updatedAlbum = jukeboxdAlbumService.updateAlbum(album);
-        return new ResponseEntity<>(updatedAlbum, HttpStatus.OK);
+        return ResponseEntity.ok(updatedAlbum);
     }
 
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<?> deleteAlbum(@PathVariable("id") Long id) {
         jukeboxdAlbumService.deleteAlbum(id);
-        return new ResponseEntity<>(HttpStatus.OK);
+        return ResponseEntity.noContent().build();
     }
 }

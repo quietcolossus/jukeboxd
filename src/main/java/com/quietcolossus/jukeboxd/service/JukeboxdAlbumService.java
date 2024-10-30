@@ -1,6 +1,6 @@
 package com.quietcolossus.jukeboxd.service;
 
-import com.quietcolossus.jukeboxd.exception.AlbumNotFoundException;
+import com.quietcolossus.jukeboxd.exception.ResourceNotFoundException;
 import com.quietcolossus.jukeboxd.model.JukeboxdAlbum;
 import com.quietcolossus.jukeboxd.repository.JukeboxdAlbumRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +18,15 @@ public class JukeboxdAlbumService {
     }
 
     public JukeboxdAlbum addAlbum(JukeboxdAlbum album) {
-        return jukeboxdAlbumRepository.save(album);
+        JukeboxdAlbum savedAlbum = jukeboxdAlbumRepository.save(album);
+
+        String formattedArtist = album.getArtistName().toLowerCase().replace(" ", "-");
+        String formattedTitle = album.getTitle().toLowerCase().replace(" ", "-");
+        String coverImageUrl = formattedArtist + "-" + formattedTitle + "-" + savedAlbum.getAlbumId();
+
+        savedAlbum.setCoverImageUrl(coverImageUrl);
+
+        return jukeboxdAlbumRepository.save(savedAlbum);
     }
 
     public List<JukeboxdAlbum> findAllAlbums() {
@@ -38,7 +46,7 @@ public class JukeboxdAlbumService {
 
     public JukeboxdAlbum findAlbumById(Long id) {
         return jukeboxdAlbumRepository.findById(id)
-                .orElseThrow(() -> new AlbumNotFoundException("Album by id " + id + " was not found"));
+                .orElseThrow(() -> new ResourceNotFoundException("Album by id " + id + " was not found"));
     }
 
     public void deleteAlbum(Long id) {

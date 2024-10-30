@@ -1,16 +1,12 @@
 package com.quietcolossus.jukeboxd.service;
 
-import com.quietcolossus.jukeboxd.exception.ArtistNotFoundException;
-import com.quietcolossus.jukeboxd.model.JukeboxdAlbum;
+import com.quietcolossus.jukeboxd.exception.ResourceNotFoundException;
 import com.quietcolossus.jukeboxd.model.JukeboxdArtist;
-import com.quietcolossus.jukeboxd.model.JukeboxdArtist;
-import com.quietcolossus.jukeboxd.repository.JukeboxdArtistRepository;
 import com.quietcolossus.jukeboxd.repository.JukeboxdArtistRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.UUID;
 
 @Service
 public class JukeboxdArtistService {
@@ -35,7 +31,7 @@ public class JukeboxdArtistService {
 
     public JukeboxdArtist findArtistById(Long id) {
         return jukeboxdArtistRepository.findById(id)
-                .orElseThrow(() -> new ArtistNotFoundException("Artist by id " + id + " was not found"));
+                .orElseThrow(() -> new ResourceNotFoundException("Artist by id " + id + " was not found"));
     }
     public List<JukeboxdArtist> saveAll(List<JukeboxdArtist> artists) {
         return jukeboxdArtistRepository.saveAll(artists);
